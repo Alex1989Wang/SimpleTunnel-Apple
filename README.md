@@ -28,6 +28,7 @@ sudo tunnel_server <port> <path-to-config-plist>
 
 The NEProvider family of APIs require the following entitlement:
 
+```
 <key>com.apple.developer.networking.networkextension</key>
 <array>
 	<string>packet-tunnel-provider</string>
@@ -35,6 +36,7 @@ The NEProvider family of APIs require the following entitlement:
 	<string>content-filter-provider</string>
 </array>
 </plist>
+```
 
 The SimpleTunnel.app and the provider extensions will not run if they are not code signed with this entitlement.
 
@@ -52,12 +54,14 @@ This can achived by editing the tunnel server's run scheme from your Xcode.
 
 The info.plist of PacketTunnel network extension is edited to add the following fields so that it can use Bonjour service. 
 
+```
 <key>NSLocalNetworkUsageDescription</key>
 <string>Network usage is required for macOS/iOS communication</string>
 <key>NSBonjourServices</key>
 <array>
     <string>_tunnelserver._tcp</string>
 </array>
+```
 
 ### Build
 
