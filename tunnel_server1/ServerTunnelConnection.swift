@@ -21,7 +21,11 @@ class ServerTunnelConnection: Connection {
 	var utunName: String?
 
 	/// A dispatch source for the UTUN interface socket.
-	var utunSource: DispatchSourceRead?
+    var utunSource: DispatchSourceRead? {
+        didSet {
+            simpleTunnelLog("dispatch: \(String(describing: utunSource))")
+        }
+    }
 
 	/// A flag indicating if reads from the UTUN interface are suspended.
 	var isSuspended = false
@@ -247,7 +251,7 @@ class ServerTunnelConnection: Connection {
 	/// Stop reading packets from the UTUN interface.
 	override func suspend() {
 		isSuspended = true
-        utunSource?.cancel()
+        utunSource?.suspend()
 	}
 
 	/// Resume reading packets from the UTUN interface.

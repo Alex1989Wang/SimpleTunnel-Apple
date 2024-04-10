@@ -21,7 +21,6 @@ class ServerTunnel: Tunnel, TunnelDelegate, StreamDelegate {
     var writeStream: OutputStream?
 
 	/// A buffer where the data for the current packet is accumulated.
-//	let packetBuffer = NSMutableData()
     private(set) var packetBuffer = Data()
 
 	/// The number of bytes remaining to be read for the current packet.
@@ -188,15 +187,15 @@ class ServerTunnel: Tunnel, TunnelDelegate, StreamDelegate {
     
     /// Handle a stream event.
     func stream(_ aStream: Stream, handle eventCode: Stream.Event) {
-        simpleTunnelLog("server stream deelgate called: \(eventCode)")
-        switch aStream {
-            
-        case writeStream!:
+        simpleTunnelLog("server stream deelgate called: \(eventCode.rawValue.description)")
+        
+        /// write stream
+        if let writeStream, aStream === writeStream {
             switch eventCode {
             case [.hasSpaceAvailable]:
                 // Send any buffered data.
                 if !savedData.isEmpty {
-                    guard savedData.writeToStream(writeStream!) else {
+                    guard savedData.writeToStream(writeStream) else {
                         closeTunnel()
                         delegate?.tunnelDidClose(self)
                         break
@@ -216,8 +215,11 @@ class ServerTunnel: Tunnel, TunnelDelegate, StreamDelegate {
             default:
                 break
             }
-            
-        case readStream!:
+            return
+        }
+       
+        /// read stream
+        if let readStream, aStream === readStream {
             var needCloseTunnel = false
             switch eventCode {
             case [.hasBytesAvailable]:
@@ -237,11 +239,7 @@ class ServerTunnel: Tunnel, TunnelDelegate, StreamDelegate {
                 closeTunnel()
                 delegate?.tunnelDidClose(self)
             }
-            
-        default:
-            break
         }
-        
     }
     
     // MARK: Tunnel
