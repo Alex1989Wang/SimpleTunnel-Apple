@@ -56,9 +56,10 @@ Copyright (C) 2016 Apple Inc. All rights reserved.
 # Changes 
 
 There are a couple of changes done to the orignal demo project published by Apple to get this working. 
+This original copy of this demo should be found here: [SimpleTunnel](https://github.com/robovm/apple-ios-samples/tree/master/SimpleTunnelCustomizedNetworkingUsingtheNetworkExtensionFramework). 
 
 - codebase upgraded to use the latest API
-- codebase make compatible with the latest swift version (5.2)
+- codebase made compatible with the latest swift version (5.2)
 - serveral bugfixes 
 
 ### Tunnel Server 
