@@ -45,6 +45,22 @@ You can request this entitlement by sending an email to networkextension@apple.c
 The SimpleTunnel iOS products require iOS 9.0 or newer.
 The SimpleTunnel OS X products require OS X 11.0 or newer.
 
+### Build
+
+SimpleTunnel requires Xcode 8.0 or newer.
+The SimpleTunnel iOS targets require the iOS 9.0 SDK or newer.
+The SimpleTunnel OS X targets require the OS X 11.0 SDK or newer.
+
+Copyright (C) 2016 Apple Inc. All rights reserved.
+
+# Changes 
+
+There are a couple of changes done to the orignal demo project published by Apple to get this working. 
+
+- codebase upgraded to use the latest API
+- codebase make compatible with the latest swift version (5.2)
+- serveral bugfixes 
+
 ### Tunnel Server 
 
 The tunnel server command line program needs to be run as "root" and pass in the config file and port number as arguments. 
@@ -63,10 +79,5 @@ The info.plist of PacketTunnel network extension is edited to add the following 
 </array>
 ```
 
-### Build
-
-SimpleTunnel requires Xcode 8.0 or newer.
-The SimpleTunnel iOS targets require the iOS 9.0 SDK or newer.
-The SimpleTunnel OS X targets require the OS X 11.0 SDK or newer.
-
-Copyright (C) 2016 Apple Inc. All rights reserved.
+### Bugfix 
+- [shouldn't call cancel on a dispatch source](https://github.com/Alex1989Wang/SimpleTunnel-Apple/pull/3)
